@@ -15,10 +15,10 @@ const bot = new TelegramBot(telegramToken, { polling: true });
 const genAI = new GoogleGenerativeAI(geminiApiKey);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 
-let thesisKnowledge = "";
+let nonsenseManifesto = "";
 try {
   console.log("در حال بارگذاری دانش متمرکز از فایل...");
-  thesisKnowledge = fs.readFileSync("thesis.txt", "utf-8");
+  nonsenseManifesto = fs.readFileSync("thesis.txt", "utf-8");
   console.log("دانش متمرکز با موفقیت بارگذاری شد.");
 } catch (error) {
   console.error("خطا: فایل 'thesis.txt' پیدا نشد. لطفا ابتدا این فایل را بسازید.");
@@ -68,7 +68,7 @@ bot.onText(/\/بگرد (.+)|\/search (.+)/, (msg, match) => {
   const keyword = match[1];
   console.log(`[Chat ID: ${chatId}] درخواست جستجو برای "${keyword}" دریافت شد.`);
 
-  const paragraphs = thesisKnowledge.split(/\n\s*\n/);
+  const paragraphs = nonsenseManifesto.split(/\n\s*\n/);
   const results = paragraphs.filter((p) => p.toLowerCase().includes(keyword.toLowerCase()));
 
   if (results.length > 0) {
