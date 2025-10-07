@@ -197,7 +197,7 @@ ${chatHistory}
     }
   } catch (error) {
     console.error("خطا در پردازش پیام:", error);
-    bot.sendMessage(chatId, "متاسفانه مشکلی در پردازش درخواست شما پیش آمد.");
+    bot.sendMessage(chatId, "خشابم خالیست. با عرض پوزش، فعلاً نمیتوانم کوس‌هایم را شیر کنم");
   }
 });
 
