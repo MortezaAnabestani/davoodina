@@ -26,8 +26,8 @@ try {
 }
 
 const conversationHistory = {};
-const gameState = {}; // برای ذخیره وضعیت بازی
-const HISTORY_LIMIT = 5;
+const gameState = {};
+const HISTORY_LIMIT = 15;
 
 console.log("بات دستیار آنلاین شد...");
 
@@ -46,11 +46,11 @@ bot.onText(/\/duel/, (msg) => {
     gameState[chatId].players[userId] = msg.from.first_name || "User";
     bot.sendMessage(
       chatId,
-      ` دوئل شروع شد! \n${msg.from.first_name} کوس‌شِیر اول رو روشن کرد. من خودم می‌شم داورتون! \ کی تخمش رو داره بیاد؟ (برای شرکت، /duelبزنید و جمله‌تون رو بنویسید)`,
+      ` دوئل شروع شد! \n شل‌مغز اول: \n ${msg.from.first_name}\n (بنویس /duel و جوابش رو بده)`,
       { reply_to_message_id: msg.message_id }
     );
   } else {
-    bot.sendMessage(chatId, `${msg.from.first_name}، بدجایی وارد شدی بچه! ماشه رو بکش و بگوز حرفت رو!`, {
+    bot.sendMessage(chatId, `شل‌مغز ثانی: /n ${msg.from.first_name}`, {
       reply_to_message_id: msg.message_id,
     });
   }
@@ -104,7 +104,7 @@ bot.on("message", async (msg) => {
       bot.sendMessage(chatId, leaderboard);
 
       // پایان بازی بعد از ۵ نفر
-      if (Object.keys(gameState[chatId].players).length >= 5) {
+      if (Object.keys(gameState[chatId].players).length >= 2) {
         bot.sendMessage(chatId, "🎉 دوئل تموم شد! میگم که کی زنده مونده! !");
         gameState[chatId] = { active: false, players: {}, scores: {} };
       }
